@@ -13,15 +13,38 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="audios">
+      <UniqueIdentifier>{af62d1ea-2b2e-41d2-9271-54d08b859659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Escenarios">
+      <UniqueIdentifier>{6a177c7f-b225-46b3-95b9-37fe2e284517}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="FuncionesMain.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Escenarios\AnimacionEntrada.cpp">
+      <Filter>Escenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="EscenarioInformacion.cpp">
+      <Filter>Escenarios</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HambreCeroBiblioteca.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audios\FloatingTrees.wav">
+      <Filter>audios</Filter>
+    </Media>
+    <Media Include="audios\Key.wav">
+      <Filter>audios</Filter>
+    </Media>
   </ItemGroup>
 </Project>
