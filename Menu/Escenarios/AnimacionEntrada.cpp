@@ -60,7 +60,7 @@ namespace AnimacionEntrada {
 			L" ███████████████   ▓▓▓▓▓▓▓▓▓▓ ▓▓▓                             ",
 			L" ███████████████   ▓▓▓▓▓▓▓▓▓▓  ▓▓▓        ▓▓           ▓▓     ",
 			L" ███████████████   ▓▓▓▓▓▓▓▓▓▓   ▓▓▓        ▓▓▓▓▓▓▓▓▓▓▓▓▓      ",
-			L" ███████████████   ▓▓▓▓▓▓▓▓▓▓    ████████████████████████    ",
+			L" ███████████████   ▓▓▓▓▓▓▓▓▓▓    ████████████████████████     ",
 			L" ███████████████     ▓▓▓▓▓▓▓▓   ██████████████████████████    ",
 			L" ███████████████     ▓▓▓▓▓▓▓▓   ███     ███          █████    ",
 			L" ████████████████████▓▓▓▓▓▓▓▓   ███     ███          █████    ",
@@ -91,8 +91,8 @@ namespace AnimacionEntrada {
 	void DibujarFrame4() {
 		const wchar_t* silla[] = {
 			L"                                                           ",
-			L"                                                           ",
-			L"                                      ▓▓▓▓▓▓▓              ",
+			L"                                      ▒▒▒▒▒▒▒▒             ",
+			L"                                     ▒▓▓▓▓▓▓▓              ",
 			L"                                      ▓▓▓▓▓▓▓              ",
 			L"                                      ▓▓▓▓▓▓▓              ",
 			L"                                       ▓▓▓▓▓               ",
@@ -166,8 +166,8 @@ namespace AnimacionEntrada {
 	void AnimacionDeEntrada() {
 		Sleep(2000); 
 
-		LiberarPantalla(ALTO);
-		InicializarPantalla(ALTO, ANCHO);
+		funciones::LiberarPantalla();
+		funciones::InicializarPantalla();
 
 		DibujarFrame2();
 

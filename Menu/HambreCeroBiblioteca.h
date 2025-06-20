@@ -14,15 +14,6 @@ struct Posicion
     int x;
     int y;
 };
-// Posiciones de los pinos
-const Posicion posicionesPinos[6] = {
-    {1, 16},
-    {10, 14},
-    {20, 15},
-    {30, 17},
-    {40, 18},
-    {50, 19}
-};
 struct Figura
 {   
     const wchar_t** dato;
@@ -57,10 +48,6 @@ extern int ALTO;
 extern int ANCHO;
 extern Celda** pantalla;
 
-//Liberar Pantalla
-void LiberarPantalla(int alto);
-// Incializar Pantalla
-void InicializarPantalla(int alto, int ancho);
 
 // funciones de la animacion de entrada
 namespace AnimacionEntrada {
@@ -71,7 +58,7 @@ namespace AnimacionEntrada {
     void AnimacionDeEntrada();
 }
 namespace informacion {
-    void TituloInformacion();
+    void ContenidoInformacion();
 	ConsoleColor CondicionTitulo(int fila, int columna, wchar_t c);
     void MostrarInformacion();
 }
@@ -79,6 +66,7 @@ namespace informacion {
 
 // funciones principales del juego
 namespace funciones {
+    void configurarConsola();
     //Mostrar Pantalla
     void mostrarPantalla();
     // Mostrar frases
@@ -93,7 +81,10 @@ namespace funciones {
     ConsoleColor Bordes(int fila, int columna, wchar_t c);
     void DibujarFiguraAvanzada(FiguraAvanzada& figura);
     void ElejirOpcion(int opcion, int seleccionDeOpcion, int* configurarEntrada, bool* salirAnimacion);
-    
+	void LiberarPantalla();
+	void InicializarPantalla();
+
+    void Menu();
 
 }
 
