@@ -48,6 +48,7 @@ extern int ALTO;
 extern int ANCHO;
 extern Celda** pantalla;
 
+extern bool salirAnimacion;
 
 // funciones de la animacion de entrada
 namespace AnimacionEntrada {
@@ -66,6 +67,11 @@ namespace informacion {
 
 // funciones principales del juego
 namespace funciones {
+    void ResetearConsola() {
+        Console::BackgroundColor = ConsoleColor::Black;
+        Console::ForegroundColor = ConsoleColor::White;
+        Console::Clear();
+    }
     void configurarConsola();
     //Mostrar Pantalla
     void mostrarPantalla();
@@ -88,3 +94,9 @@ namespace funciones {
 
 }
 
+namespace Juegos {
+    void ElejirJuego();
+}
+namespace PrimerJuego {
+    void IniciarJuego();
+}

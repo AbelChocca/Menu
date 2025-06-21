@@ -111,10 +111,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EscenarioInformacion.cpp" />
+    <ClCompile Include="Escenarios\EscenarioInformacion.cpp" />
     <ClCompile Include="FuncionesMain.cpp" />
     <ClCompile Include="Escenarios\AnimacionEntrada.cpp" />
+    <ClCompile Include="Juego1.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="ElejirJuego.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HambreCeroBiblioteca.h" />

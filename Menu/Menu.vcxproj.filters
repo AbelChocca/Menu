@@ -30,7 +30,13 @@
     <ClCompile Include="Escenarios\AnimacionEntrada.cpp">
       <Filter>Escenarios</Filter>
     </ClCompile>
-    <ClCompile Include="EscenarioInformacion.cpp">
+    <ClCompile Include="ElejirJuego.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Escenarios\EscenarioInformacion.cpp">
+      <Filter>Escenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="Juego1.cpp">
       <Filter>Escenarios</Filter>
     </ClCompile>
   </ItemGroup>

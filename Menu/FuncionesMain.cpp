@@ -596,16 +596,18 @@ namespace funciones {
     // Elejir opciones del Menu
     void ElejirOpcion(int opcion, int seleccionDeOpcion, int* configurarEntrada, bool* salirAnimacion) {
         if (opcion == 13) {
-            *salirAnimacion = !salirAnimacion;
             switch (seleccionDeOpcion) {
             case 0:
                 Console::Clear();
+				*salirAnimacion = !salirAnimacion;
                 if (*configurarEntrada < 1) {
                     (*configurarEntrada)++;
                     AnimacionEntrada::AnimacionDeEntrada();
                 }
+				Juegos::ElejirJuego();
                 break;
             case 1:
+				*salirAnimacion = !salirAnimacion;
                 informacion::MostrarInformacion();
                 break;
             }

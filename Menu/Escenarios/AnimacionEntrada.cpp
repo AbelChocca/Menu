@@ -161,16 +161,38 @@ namespace AnimacionEntrada {
 		}	
 		funciones::mostrarPantalla();
 	}
-
+	void PulsarEnter() {
+		const wchar_t* enter[] = {
+			L"Pulsa 'Enter' para continuar..."
+		};
+		int longitud = wcslen(enter[0]);
+		FiguraAvanzada Enter{
+			enter,
+			1,
+			longitud,
+			ANCHO - longitud,
+			ALTO - 3,
+			ConsoleColor::DarkYellow,
+			nullptr
+		};
+		funciones::DibujarFiguraAvanzada(Enter);
+		funciones::mostrarPantalla();
+		// Requerir enter para continuar
+		int key;
+		do {
+			key = _getch();
+			if (key == 13) {
+				break;
+			}
+		} while (key != 13);
+	}
 	// Funcion principal
 	void AnimacionDeEntrada() {
 		Sleep(2000); 
-
 		funciones::LiberarPantalla();
 		funciones::InicializarPantalla();
 
 		DibujarFrame2();
-
 		funciones::mostrarPantalla();
 		Sleep(1000);
 		EscribirFrase();
@@ -178,7 +200,8 @@ namespace AnimacionEntrada {
 		LimpiarFrame();
 		DibujarFrame4();
 		funciones::mostrarPantalla();
-
+		PulsarEnter();
+		Sleep(1000);
 	}
 
 }
