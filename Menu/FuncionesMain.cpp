@@ -60,7 +60,13 @@ int flechitaX = 32;
 int flechitaY = 11;
 
 namespace funciones {
+	void ResetearConsola() {
+		Console::BackgroundColor = ConsoleColor::Black;
+		Console::ForegroundColor = ConsoleColor::White;
+		Console::Clear();
+	}
     void configurarConsola() {
+		SetConsoleOutputCP(CP_UTF8);
         Console::SetWindowSize(ANCHO, ALTO);
         Console::SetBufferSize(ANCHO, ALTO);
         Console::CursorVisible = false;
@@ -608,6 +614,7 @@ namespace funciones {
                 break;
             case 1:
 				*salirAnimacion = !salirAnimacion;
+				SetConsoleOutputCP(CP_UTF8);
                 informacion::MostrarInformacion();
                 break;
             }

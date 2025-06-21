@@ -67,11 +67,7 @@ namespace informacion {
 
 // funciones principales del juego
 namespace funciones {
-    void ResetearConsola() {
-        Console::BackgroundColor = ConsoleColor::Black;
-        Console::ForegroundColor = ConsoleColor::White;
-        Console::Clear();
-    }
+    void ResetearConsola();
     void configurarConsola();
     //Mostrar Pantalla
     void mostrarPantalla();

@@ -1,4 +1,4 @@
-﻿#include "../HambreCeroBiblioteca.h"
+#include "../HambreCeroBiblioteca.h"
 
 const int PantallaInfoHeight = 100;
 const int ViewPortHeight = 30;
@@ -378,5 +378,4 @@ namespace informacion {
 			Sleep(50);
 		}
 	}
-
 }
