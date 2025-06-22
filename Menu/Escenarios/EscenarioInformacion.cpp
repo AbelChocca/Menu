@@ -41,9 +41,9 @@ namespace informacion {
 		}
 	}
 	// Incializar pantalla
-	void InicializarPantallaInfo(int ALTO, int ANCHO) {
-		PantallaInfo = new Celda * [ALTO];
-		for (int i = 0; i < ALTO; ++i) {
+	void InicializarPantallaInfo() {
+		PantallaInfo = new Celda * [PantallaInfoHeight];
+		for (int i = 0; i < PantallaInfoHeight; ++i) {
 			PantallaInfo[i] = new Celda[ANCHO];
 			for (int j = 0; j < ANCHO; ++j) {
 				PantallaInfo[i][j].simbolo = L' ';
@@ -58,11 +58,11 @@ namespace informacion {
 	}
 	void DibujarFlechita() {
 		const wchar_t* flecha[] = {
-			L"     ██      ",
-			L"   █████████ ",
-			L" ███████████ ",
-			L"   █████████ ",
-			L"     ██      ",
+			L"     ##      ",
+			L"   ######### ",
+			L" ########### ",
+			L"   ######### ",
+			L"     ##      ",
 			L"             ",
 			L" Pulsa 'Q'   ",
 			L" para volver "
@@ -81,21 +81,21 @@ namespace informacion {
 	}
 	// Dibujar titulo de informacion
 	ConsoleColor CondicionTitulo(int fila, int columna, wchar_t c) {
-		bool bordes = (fila == 0 || fila == 9 || columna <= 1 || columna >= 94);
+		bool bordes = (fila == 0 || fila == 9 || columna <= 1 || columna >= 102);
 		return bordes ? ConsoleColor::Blue : ConsoleColor::DarkBlue;
 	}
 	void ContenidoInformacion() {
 		const wchar_t* Informacion[] = {
-			L"░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░",
-			L"░░                                                                                            ░░",
-			L"░░  ██╗███╗   ██╗███████╗ ██████╗ ███████╗ ███╗   ███╗ █████╗  ██████╗██╗ ██████╗ ███╗   ██╗  ░░",
-			L"░░  ██║████╗  ██║██╔════╝██╔═══██╗██   ██║ ████╗ ████║██╔══██╗██╔════╝██║██╔═══██╗████╗  ██║  ░░",
-			L"░░  ██║██╔██╗ ██║█████╗  ██║   ██║█████╔═╝ ██╔████╔██║███████║██║     ██║██║   ██║██╔██╗ ██║  ░░",
-			L"░░  ██║██║╚██╗██║██╔══╝  ██║   ██║██╔████╗ ██║╚██╔╝██║██╔══██║██║     ██║██║   ██║██║╚██╗██║  ░░",
-			L"░░  ██║██║ ╚████║██║     ╚██████╔╝██║  ██║ ██║ ╚═╝ ██║██║  ██║╚██████╗██║╚██████╔╝██║ ╚████║  ░░",
-			L"░░  ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝  ░░",
-			L"░░                                                                                            ░░",
-			L"░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
+			L"*******************************************************************************************************",
+			L"**                                                                                                   **",
+			L"**  ### ####   ### ######## #######  ######## ####   ####  ######   ####### ###  ####### ####   ###  **",
+			L"**  ### #####  ### ################# ###  ### ##### ##### ###  ### ######## ### ##############  ###  **",
+			L"**  ### ###### ### ###     ###   ### #######  ########### ######## ###      ### ###   ######### ###  **",
+			L"**  ### ########## ######  ###   ### ######## ########### ######## ###      ### ###   #############  **",
+			L"**  ### ### ###### ######  ######### ###  ### ### ### ### ###  ### ######## ### ############ ######  **",
+			L"**  ### ###  ##### ###      #######  ###  ### ###     ### ###  ###  ####### ###  ####### ###  #####  **",
+			L"**                                                                                                   **",
+			L"*****************************************************************************************+++***********",
 		};
 
 		int longitud = wcslen(Informacion[0]);
@@ -112,7 +112,7 @@ namespace informacion {
 	}
 	// Descripcion
 	ConsoleColor BordesDescripcion(int fila, int columna, wchar_t c) {
-		return (c == L'▄' || c == L'█' || c == L'▀') ? ConsoleColor::Blue : ConsoleColor::DarkYellow;
+		return (c == L'#') ? ConsoleColor::Blue : ConsoleColor::DarkYellow;
 	}
 	ConsoleColor MarkCondition(int fila, int columna, wchar_t c) {
 		if (fila == 0) return ConsoleColor::DarkYellow;
@@ -122,26 +122,26 @@ namespace informacion {
 
 	}
 	ConsoleColor SantiagoCondition(int fila, int columna, wchar_t c) {
-		return (c == L'▓' || c == L'╝' || fila == 5 || c == L'╚' || fila == 4) ?
+		return (c == L'#') ?
 			ConsoleColor::DarkYellow : ConsoleColor::Gray;
 	}
 	void DescripcionDelJuego() {
 		const wchar_t* DefinicionJuego[] = {
-			L"                 █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█                ",
-			L"                 █   DESCRIPCION   █                ",
-			L"                 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█                ",
+			L"                 +-------------------+              ",
+			L"                 |   DESCRIPCION     |              ",
+			L"                 +-------------------+              ",
 			L"                                                    ",
 			L"                                                    ",
-			L"████████████████████████████████████████████████████",
-			L"█  Hambre Cero: La Misión es un videojuego         █",
-			L"█  en consola enfocado en el ODS 2: Hambre Cero,   █",
-			L"█  donde el jugador enfrenta desafíos para         █",
-			L"█  recolectar, distribuir y gestionar alimentos    █",
-			L"█  con el fin de apoyar a comunidades vulnerables. █",
-			L"█  Este juego busca generar consciencia, empatia   █",
-			L"█  y compromiso social frente a la problemática    █",
-			L"█  global del hambre.                              █",
-			L"████████████████████████████████████████████████████"
+			L"####################################################",
+			L"#  Hambre Cero: La Mision es un videojuego         #",
+			L"#  en consola enfocado en el ODS 2: Hambre Cero,   #",
+			L"#  donde el jugador enfrenta desafios para         #",
+			L"#  recolectar, distribuir y gestionar alimentos    #",
+			L"#  con el fin de apoyar a comunidades vulnerables. #",
+			L"#  Este juego busca generar consciencia, empatia   #",
+			L"#  y compromiso social frente a la problematica    #",
+			L"#  global del hambre.                              #",
+			L"####################################################"
 		};
 		int longitud = wcslen(DefinicionJuego[0]);
 		FiguraAvanzada descripcion = {
@@ -158,9 +158,9 @@ namespace informacion {
 	// Personajes
 	void PartePersonajes() {
 		const wchar_t* Titulo[] = {
-			L"█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█",
-			L"█   PERSONAJES   █",
-			L"█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█",
+			L"##################",
+			L"#   PERSONAJES   #",
+			L"##################",
 		};
 		int longitudTitulo = wcslen(Titulo[0]);
 		FiguraAvanzada tituloPersonaje = {
@@ -175,14 +175,14 @@ namespace informacion {
 		DibujarFiguraAvanzadaInfo(tituloPersonaje);
 
 		const wchar_t* Personajes[] = {
-			L"█████████████████████████████████████████████████████████████████████",
-			L"█ ° Mark - Protagonista: Un joven altruista que busca combatir el   █",
-			L"█      hambre en su comunidad.                                      █",
-			L"█ ° Santiago - Antagonista: Un empresario corrupto que prioriza sus █",
-			L"█      ganancias sobre el bienestar social.                         █",
-			L"█ ° Fiel - Aliado: Un cerdo que busca apoyar a quien lo ayuda       █",
-			L"█ ° Comunidad: Personas afectadas por el hambre que necesitan ayuda.█",
-			L"█████████████████████████████████████████████████████████████████████"
+			L"#####################################################################",
+			L"# ° Mark - Protagonista: Un joven altruista que busca combatir el   #",
+			L"#      hambre en su comunidad.                                      #",
+			L"# ° Santiago - Antagonista: Un empresario corrupto que prioriza sus #",
+			L"#      ganancias sobre el bienestar social.                         #",
+			L"# ° Fiel - Aliado: Un cerdo que busca apoyar a quien lo ayuda       #",
+			L"# ° Comunidad: Personas afectadas por el hambre que necesitan ayuda.#",
+			L"#####################################################################"
 		};
 		int longitudPersonaje = wcslen(Personajes[0]);
 		FiguraAvanzada descripcionPersonajes = {
@@ -197,9 +197,9 @@ namespace informacion {
 		DibujarFiguraAvanzadaInfo(descripcionPersonajes);
 		// Dibujar Personajes
 		const wchar_t* Mark[] = {
-			L"    ▄   ",
-			L"   ▐█▌  ",
-			L"    █   ",
+			L"    #   ",
+			L"   ###  ",
+			L"    #   ",
 			L"  Mark  ",
 		};
 		int longitudMark = wcslen(Mark[0]);
@@ -215,8 +215,8 @@ namespace informacion {
 		DibujarFiguraAvanzadaInfo(mark);
 		const wchar_t* Fiel[] = {
 			L"           ",
-			L"  ~████▄   ",
-			L"    ▀ ▀    ",
+			L"  -#####   ",
+			L"    # #    ",
 			L"    Fiel   ",
 		};
 		int longitudFiel = wcslen(Fiel[0]);
@@ -232,11 +232,11 @@ namespace informacion {
 		DibujarFiguraAvanzadaInfo(fiel);
 
 		const wchar_t* Santiago[] = {
-			L"    ▓▓    ",
-			L"   ████   ",
-			L"   ╚██╝   ",
-			L"    ██    ",
-			L"    ╝╚    ",
+			L"    ##    ",
+			L"   ####   ",
+			L"   ####   ",
+			L"    ##    ",
+			L"    ##    ",
 			L" Santiago "
 		};
 		int longitudSantiago = wcslen(Santiago[0]);
@@ -253,9 +253,9 @@ namespace informacion {
 
 		const wchar_t* Personas[] = {
 			L"            ",
-			L"     ▓      ",
-			L"    ▐█▌     ",
-			L"     █      ",
+			L"     #      ",
+			L"    ###     ",
+			L"     #      ",
 			L"  Personas  ",
 		};
 		int longitudPersonas = wcslen(Personas[0]);
@@ -272,36 +272,35 @@ namespace informacion {
 	}
 	// Dibujar ayuda
 	ConsoleColor AyudaCondicion(int fila, int columna, wchar_t c) {
-		if (c == L'═' || c == L'╗' || c == L'╣'
-			|| c == L'║' || c == L'╠' || c == L'╔'
-			|| c == L'╚' || c == L'╝') return ConsoleColor::DarkYellow;
+		if (c == L'|' || c == L'-' || c == L'+') return ConsoleColor::DarkYellow;
 		if (fila == 1 || fila == 3 || fila == 9 || fila == 10) return ConsoleColor::Blue;
+
+		return ConsoleColor::White;
 	}
 	void DibujarAyuda() {
 		const wchar_t* Ayuda[] = {
-		   L"╔═══════════════════════════╗",
-		   L"║          AYUDA            ║",
-		   L"╠═══════════════════════════╣",
-		   L"║        CONTROLES          ║",
-		   L"║                           ║",
-		   L"║ 'w' - Subir               ║",
-		   L"║ 's' - Bajar               ║",
-		   L"║ 'q' - Volver al menú      ║",
-		   L"║                           ║",
-		   L"║ Explora los personajes y  ║",
-		   L"║ la historia del juego.    ║",
-		   L"║                           ║",
-		   L"║ Cuando entre a seleccionar║",
-		   L"║ los niveles, debe pulsar  ║",
-		   L"║ la tecla '1' para selecc- ║",
-		   L"║ ionar el nivel 1, tecla   ║",
-		   L"║ '2' para el nivel 2, etc..║",
-		   L"║ Y darle a la tecla Enter  ║",
-		   L"║ para comenzar a jugar!    ║",
-		   L"║                           ║",
-		   L"║  ¡Disfruta descubriendo!  ║",
-		   L"╚═══════════════════════════╝",
-
+		   L"+---------------------------+",
+		   L"|          AYUDA            |",
+		   L"+---------------------------+",
+		   L"|        CONTROLES          |",
+		   L"|                           |",
+		   L"| 'w' - Subir               |",
+		   L"| 's' - Bajar               |",
+		   L"| 'q' - Volver al menú      |",
+		   L"|                           |",
+		   L"| Explora los personajes y  |",
+		   L"| la historia del juego.    |",
+		   L"|                           |",
+		   L"| Cuando entre a seleccionar|",
+		   L"| los niveles, debe pulsar  |",
+		   L"| la tecla '1' para selecc- |",
+		   L"| ionar el nivel 1, tecla   |",
+		   L"| '2' para el nivel 2, etc..|",
+		   L"| Y darle a la tecla Enter  |",
+		   L"| para comenzar a jugar!    |",
+		   L"|                           |",
+		   L"|  ¡Disfruta descubriendo!  |",
+		   L"+---------------------------+",
 		};
 		int longitudAyuda = wcslen(Ayuda[0]);
 		FiguraAvanzada ayuda = {
@@ -335,11 +334,9 @@ namespace informacion {
 		funciones::Menu();
 	}
 	void MostrarInformacion() {
-		Console::Clear();
 		funciones::LiberarPantalla(); // Pantalla del Menu
-		Console::SetBufferSize(ANCHO, PantallaInfoHeight);
-		Console::SetWindowSize(ANCHO, ViewPortHeight);
-		InicializarPantallaInfo(PantallaInfoHeight, ANCHO);
+		InicializarPantallaInfo();
+
 		ContenidoInformacion();
 		DibujarFlechita();
 		DescripcionDelJuego();
@@ -349,7 +346,7 @@ namespace informacion {
 
 		int lineaInicio = 0;
 
-		while (true)
+		while (currentState == GameState::Informacion)
 		{
 			if (_kbhit()) {
 				char tecla = _getch();
@@ -368,14 +365,12 @@ namespace informacion {
 					}
 					break;
 				case 'q':
-					CambiarAMenu();
+					currentState = GameState::MenuPrincipal;
 					break;
 				default:
 					break;
 				}
 			}
-
-			Sleep(50);
 		}
 	}
 }

@@ -2,11 +2,24 @@
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
+#include <fcntl.h>
+#include <io.h>
+#include <cstdio>
 #using <System.dll>
 
 using namespace std;
 using namespace System;
 using namespace System::Media;
+
+// Estados del juego
+enum class GameState {
+    MenuPrincipal,
+    Informacion,
+    SeleccionJuego,
+    Juego1,
+    Salir,
+};
+extern GameState currentState;
 
 // Structs
 struct Posicion
@@ -76,13 +89,13 @@ namespace funciones {
     // Dibujar Arbol Madre
     ConsoleColor ArbolMadre(int fila, int columna, wchar_t c);
     // Reproducir Audio 
-    void ReproducirAudio();
+    void ReproducirAudio(String^ ruta);
     // Pintar Pinos
     ConsoleColor Pinos(int fila, int columna, wchar_t c);
     // Dibujar bordes de botones
     ConsoleColor Bordes(int fila, int columna, wchar_t c);
     void DibujarFiguraAvanzada(FiguraAvanzada& figura);
-    void ElejirOpcion(int opcion, int seleccionDeOpcion, int* configurarEntrada, bool* salirAnimacion);
+    void ElejirOpcion(int opcion, int seleccionDeOpcion, int* configurarEntrada );
 	void LiberarPantalla();
 	void InicializarPantalla();
 
@@ -94,5 +107,6 @@ namespace Juegos {
     void ElejirJuego();
 }
 namespace PrimerJuego {
+    void ConfigurarPrimerNivel();
     void IniciarJuego();
 }

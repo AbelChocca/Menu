@@ -33,7 +33,7 @@ namespace Juegos {
 		for (int i = 0; i < ALTO; ++i) {
 			for (int j = 0; j < ANCHO; ++j) {
 				pantalla[i][j].simbolo = L' ';
-				pantalla[i][j].color = ConsoleColor::Cyan;
+				pantalla[i][j].color = ConsoleColor::DarkBlue;
 				Console::BackgroundColor = pantalla[i][j].color;
 				Console::SetCursorPosition(j, i);
 				Console::Write(pantalla[i][j].simbolo);
@@ -59,7 +59,7 @@ namespace Juegos {
 			anchoCuadro1,
 			15,
 			ALTO / 2 - (altoCuadro1 / 2) - 5,
-			ConsoleColor::DarkGray,
+			ConsoleColor::White,
 			nullptr
 		};
 		funciones::DibujarFiguraAvanzada(figuraCuadro1);
@@ -83,7 +83,7 @@ namespace Juegos {
 			anchoCuadro2,
 			50,
 			ALTO / 2 - (altoCuadro2 / 2) - 5,
-			ConsoleColor::DarkGray,
+			ConsoleColor::White,
 			nullptr
 		};
 		funciones::DibujarFiguraAvanzada(figuraCuadro2);
@@ -107,7 +107,7 @@ namespace Juegos {
 			anchoCuadro3,
 			ANCHO / 2 - (anchoCuadro3 / 2),
 			ALTO / 2 - (altoCuadro3 / 2) + 5,
-			ConsoleColor::DarkGray,
+			ConsoleColor::White,
 			nullptr
 		};
 		funciones::DibujarFiguraAvanzada(figuraCuadro2);
@@ -133,7 +133,7 @@ namespace Juegos {
 			anchoBorde,
 			posicionesBorde[seleccionJuego][0],
 			posicionesBorde[seleccionJuego][1],
-			ConsoleColor::DarkBlue,
+			ConsoleColor::DarkYellow,
 			nullptr
 		};
 		DibujarParaElBorde(Bordes);
@@ -159,17 +159,17 @@ namespace Juegos {
 			anchoBorde,
 			posicionesBorde[seleccionJuego][0],
 			posicionesBorde[seleccionJuego][1],
-			ConsoleColor::Cyan,
+			ConsoleColor::DarkBlue,
 			nullptr
 		};
 		DibujarParaElBorde(Bordes);
 	}
 	void Volver() {
 		const wchar_t* volver[] = {
-			L" █   █ █▀▀▀▀█ █   █   █ █▀▀ █▀▀█ ",
-			L"  █ █  █    █ █    █ █  █▀▀ █▄▄▀ ",
-			L"   █   █▄▄▄▄█ █▄▄   █   █▄▄ █  █ ",
-			L"      Pulsa 'Q' para volver      ",
+			L"▓▓▓▓▓▓▓ █ █ ███ █▄█ █▀",
+			L"▓▓▓▓▓▓▓ ███ █ █ █ █ █▄",
+			L" ██▒██  █ █ ███ █ █ █▄",
+			L"Pulsa 'Q' para volver ",
 		};
 		int altoVolver = 4;
 		int anchoVolver = wcslen(volver[0]);
@@ -196,7 +196,7 @@ namespace Juegos {
 					funciones::LiberarPantalla();
 					funciones::ResetearConsola();
 					Console::Clear();
-					funciones::Menu();
+					currentState = GameState::MenuPrincipal;
 					return;
 					break;
 				case '1':
@@ -217,7 +217,10 @@ namespace Juegos {
 				case 13:
 					Console::Clear();
 					if (seleccionJuego == 0) {
-						PrimerJuego::IniciarJuego();
+						funciones::LiberarPantalla();
+						funciones::ResetearConsola();
+						Console::Clear();
+						currentState = GameState::Juego1;
 					}
 					return;
 					break;

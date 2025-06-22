@@ -6,10 +6,10 @@ int ALTO = 30;
 Celda** pantalla;
 // Boleanos
 bool mostrarFondo = false;
-bool salirAnimacion = false;
 // Enteros
 int seleccionDeOpcion = 0;
 int configurarAnimacionEntrada = 0;
+
 
 // Posiciones de los pinos
 const Posicion posicionesPinos[6] = {
@@ -163,19 +163,17 @@ namespace funciones {
          }
      }
     // Reproducir Audio del Juego
-     void ReproducirAudio() {
-         SoundPlayer^ player = gcnew SoundPlayer("audios\\FloatingTrees.wav");
+     void ReproducirAudio(String^ ruta) {
+
+         SoundPlayer^ player = gcnew SoundPlayer(ruta);
          try {
              player->Load();
-             player->PlayLooping();
+             player->Play();
          }
          catch (Exception^ e) {
              Console::WriteLine("Error al reproducir el audio: " + e->Message);
          }
      }
-    // Cuerpo
-
-
 	 // Dibujar nubes
 	 void DibujarNubes() {
 		 // Dibuja nube1 en varias posiciones
@@ -553,10 +551,10 @@ namespace funciones {
 		 }
 	 }
 
-	 void AnimarNubes() {
+	 void RenderizarMenu() {
 		 DWORD tiempoUltimaFrase = GetTickCount64();
 		 int fraseActual = 0;
-		 while (!salirAnimacion) {
+		 while (currentState == GameState::MenuPrincipal) {
 			 if (_kbhit()) {
 				 char tecla = _getch();
 				 tecla = tolower(tecla);
@@ -578,55 +576,53 @@ namespace funciones {
 					 }
 					 break;
 				 }
-				 funciones::ElejirOpcion(tecla, seleccionDeOpcion, &configurarAnimacionEntrada, &salirAnimacion);
+				 funciones::ElejirOpcion(tecla, seleccionDeOpcion, &configurarAnimacionEntrada);
 			 }
-			 if (!salirAnimacion) {
-				 RedibujarFondo();
-				 ActualizarNubes();
-				 DibujarNubes();
-				 if (!mostrarFondo) DibujarMenu();
+				RedibujarFondo();
+				ActualizarNubes();
+				DibujarNubes();
+				if (!mostrarFondo) DibujarMenu();
 
-				 if (GetTickCount64() - tiempoUltimaFrase >= 10000) {
-					 fraseActual++;
-					 tiempoUltimaFrase = GetTickCount64();
-					 if (fraseActual >= 10) {
-						 fraseActual = 0;
-					 }
-				 }
+				if (GetTickCount64() - tiempoUltimaFrase >= 10000) {
+					fraseActual++;
+					tiempoUltimaFrase = GetTickCount64();
+					if (fraseActual >= 10) {
+						fraseActual = 0;
+					}
+				}
 
-				 if (!mostrarFondo) funciones::MostrarFrases(fraseActual);
-				 funciones::mostrarPantalla();
-			 }
+				if (!mostrarFondo) funciones::MostrarFrases(fraseActual);
+				funciones::mostrarPantalla();
+
+				Sleep(50);
 		 }
 	 }
     // Elejir opciones del Menu
-    void ElejirOpcion(int opcion, int seleccionDeOpcion, int* configurarEntrada, bool* salirAnimacion) {
+    void ElejirOpcion(int opcion, int seleccionDeOpcion, int* configurarEntrada) {
         if (opcion == 13) {
             switch (seleccionDeOpcion) {
             case 0:
                 Console::Clear();
-				*salirAnimacion = !salirAnimacion;
-                if (*configurarEntrada < 1) {
+                if (*configurarEntrada == 0) {
                     (*configurarEntrada)++;
-                    AnimacionEntrada::AnimacionDeEntrada();
+					AnimacionEntrada::AnimacionDeEntrada();
                 }
-				Juegos::ElejirJuego();
+				currentState = GameState::SeleccionJuego;
                 break;
             case 1:
-				*salirAnimacion = !salirAnimacion;
-				SetConsoleOutputCP(CP_UTF8);
-                informacion::MostrarInformacion();
+				Console::Clear();
+				currentState = GameState::Informacion;
                 break;
             }
         }
     }
 	void Menu() {
 		configurarConsola();
-		ReproducirAudio();
+		ReproducirAudio("audios\\FloatingTrees.wav");
 		InicializarPantalla();
 
 		mostrarPantalla();
-		AnimarNubes();
+		RenderizarMenu();
 	}
 
 }

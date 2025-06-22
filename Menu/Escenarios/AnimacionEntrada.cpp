@@ -182,6 +182,7 @@ namespace AnimacionEntrada {
 		do {
 			key = _getch();
 			if (key == 13) {
+				currentState = GameState::SeleccionJuego;
 				break;
 			}
 		} while (key != 13);
@@ -189,6 +190,7 @@ namespace AnimacionEntrada {
 	// Funcion principal
 	void AnimacionDeEntrada() {
 		Sleep(2000); 
+		funciones::ReproducirAudio("audios\\Key.wav");
 		funciones::LiberarPantalla();
 		funciones::InicializarPantalla();
 
