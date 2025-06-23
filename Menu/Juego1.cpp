@@ -7,6 +7,15 @@ Celda** Juego1FondoMatriz;
 
 FiguraAvanzada cajitas[6];
 
+bool mostrarIndicacion = false;
+
+// Indicacion global
+const wchar_t* indicacion[] = {
+	L"Pulsa 'Q' para agarrar"
+};
+int longitudIndicacion = wcslen(indicacion[0]);
+int alturaIndicacion = 1;
+
 // Personaje principal
 ConsoleColor MarkCondition(int fila, int columna, wchar_t c) {
 	if (c == L'█') return ConsoleColor::DarkYellow;
@@ -31,7 +40,6 @@ FiguraAvanzada mark = {
 	ConsoleColor::DarkYellow,
 	MarkCondition
 };
-
 
 namespace PrimerJuego {
 	void configurarConsolaJuego1() {
@@ -154,7 +162,7 @@ namespace PrimerJuego {
 		};
 		Random f;
 		int longitud = wcslen(caja[0]);
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 6; i++) {
 			int posx = f.Next(10, 95);
 			int posy = f.Next(26, 33);
 
@@ -169,6 +177,64 @@ namespace PrimerJuego {
 			};
 			cajitas[i] = Cajita;
 			DibujarFiguraJuego(Cajita, Juego1FondoMatriz);
+		}
+	}
+	void ImprimirIndicacion() {
+		for (int i = 0; i < alturaIndicacion; i++) {
+			for (int j = 0; j < longitudIndicacion; j++) {
+				int posx = (Juego1ANCHO / 2 - (longitudIndicacion / 2)) + j;
+				int posy = Juego1ALTO - 8;
+
+				Console::ForegroundColor = ConsoleColor::DarkYellow;
+				Console::SetCursorPosition(posx, posy);
+				Console::Write(indicacion[i][j]);
+			}
+		}
+	}
+	void BorrarIndicacion() {
+		for (int i = 0; i < alturaIndicacion; i++) {
+			for (int j = 0; j < longitudIndicacion; j++) {
+				int posx = (Juego1ANCHO / 2 - (longitudIndicacion / 2)) + j;
+				int posy = Juego1ALTO - 8;
+
+				Console::ForegroundColor = Juego1FondoMatriz[posy][posx].color;
+				Console::SetCursorPosition(posx, posy);
+				Console::Write(Juego1FondoMatriz[posy][posx].simbolo);
+			}
+		}
+	}
+	void BorrarFrameJugador(FiguraAvanzada& jugador) {
+		for (int i = 0; i < jugador.alto; i++) {
+			for (int j = 0; j < jugador.ancho; j++) {
+				int posx = jugador.posx + j;
+				int posy = jugador.posy + i;
+
+				if (posy >= 0 && posy < Juego1ALTO && posx >= 0 && posx < Juego1ANCHO) {
+					wchar_t character = Juego1FondoMatriz[posy][posx].simbolo;
+					ConsoleColor color = Juego1FondoMatriz[posy][posx].color;
+
+					Console::ForegroundColor = color;
+					Console::SetCursorPosition(posx, posy);
+					Console::Write(character);
+				}
+			}
+		}
+	}
+	void DibujarMark(FiguraAvanzada& mark) {
+		for (int i = 0; i < mark.alto; i++) {
+			for (int j = 0; j < mark.ancho; j++) {
+				wchar_t c = mark.dato[i][j];
+				if (c != L' ') {
+					int x = mark.posx + j;
+					int y = mark.posy + i;
+
+					if (x >= 0 && x < Juego1ANCHO && y >= 0 && y < Juego1ALTO) {
+						Console::ForegroundColor = mark.funcionColor ? mark.funcionColor(i, j, c) : mark.color;
+						Console::SetCursorPosition(x, y);
+						Console::Write(c);
+					}
+				}
+			}
 		}
 	}
 	bool DetectarColisiones(FiguraAvanzada& jugador) {
@@ -194,15 +260,13 @@ namespace PrimerJuego {
 		return false;
 	}
 	void RenderizarPantalla() {
-		for (int i = 0; i < Juego1ALTO; ++i) {
-			for (int j = 0; j < Juego1ANCHO; ++j) {
-				Juego1Matriz[i][j] = Juego1FondoMatriz[i][j];
-			}
+		if (mostrarIndicacion) {
+			ImprimirIndicacion();
 		}
-
-		DibujarFiguraJuego(mark, Juego1Matriz);
-
-		mostrarJuego1();
+		else {
+			BorrarIndicacion();
+		}
+		DibujarMark(mark);
 	}
 
 	void ConfigurarPrimerNivel() {
@@ -212,15 +276,23 @@ namespace PrimerJuego {
 		GenerarPared();
 		GenerarCajasRandom();
 		
+		for (int i = 0; i < Juego1ALTO; ++i) {
+			for (int j = 0; j < Juego1ANCHO; ++j) {
+				Juego1Matriz[i][j] = Juego1FondoMatriz[i][j];
+			}
+		}
 
+		mostrarJuego1();
 		RenderizarPantalla();
 	}
 	void IniciarJuego() {
 		ConfigurarPrimerNivel();
-		const int limiteSuperiorJuego = 25; // Fila donde empieza la zona jugable
+		const int limiteSuperiorJuego = 25; 
 		const int limiteInferiorJuego = Juego1ALTO - mark.alto;
 		const int limiteIzquierdoJuego = 0;
 		const int limiteDerechoJuego = Juego1ANCHO - mark.ancho;
+
+		const int VELOCIDAD = 1;
 		
 		while (true) { // Reemplaza 'true' con una condición de fin de nivel
 			// 1. Procesar entrada del usuario
@@ -240,24 +312,39 @@ namespace PrimerJuego {
 					return; // Sale de BucleJuegoNivel1
 					break;
 				case 'w':
-					mark.posy--;
+					BorrarFrameJugador(mark);
+					mark.posy -= VELOCIDAD;
 					break;
 				case 's':
-					mark.posy++;
+					BorrarFrameJugador(mark);
+					mark.posy += VELOCIDAD;
 					break;
 				case 'd':
-					mark.posx++;
+					BorrarFrameJugador(mark);
+					mark.posx += VELOCIDAD;
 					break;
 				case 'a':
-					mark.posx--;
+					BorrarFrameJugador(mark);
+					mark.posx -= VELOCIDAD;
 					break;
 				}
 			}
 
+
 			bool colisiones_cajas = DetectarColisiones(mark);
-			if (colisiones_cajas) {
+			bool colisiones_bordes = false;
+			if (mark.posy < limiteSuperiorJuego || mark.posy > limiteInferiorJuego
+				|| mark.posx > limiteDerechoJuego || mark.posx < limiteIzquierdoJuego) {
+				colisiones_bordes = true;
+			}
+			if (colisiones_cajas || colisiones_bordes) {
 				mark.posx = mark_old_posx;
 				mark.posy = mark_old_posy;
+				mostrarIndicacion = true;
+
+			}
+			else {
+				mostrarIndicacion = false;
 			}
 			// 2. Actualizar el estado del juego
 			// ... (mover jugador, enemigos, detectar colisiones, etc.)
