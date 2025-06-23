@@ -22,6 +22,9 @@ int main() {
 			PrimerJuego::ConfigurarPrimerNivel();
 			PrimerJuego::IniciarJuego();
 			break;
+		case GameState::Juego2:
+			Juego2::IniciarJuego2();
+			break;
 		}
 	}
 	return getch();

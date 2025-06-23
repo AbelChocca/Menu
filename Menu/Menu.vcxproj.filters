@@ -39,6 +39,9 @@
     <ClCompile Include="Juego1.cpp">
       <Filter>Escenarios</Filter>
     </ClCompile>
+    <ClCompile Include="Juego2.cpp">
+      <Filter>Escenarios</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HambreCeroBiblioteca.h">

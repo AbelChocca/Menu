@@ -222,6 +222,11 @@ namespace Juegos {
 						Console::Clear();
 						currentState = GameState::Juego1;
 					}
+					else if (seleccionJuego == 1) {
+						funciones::LiberarPantalla();
+						Console::Clear();
+						currentState = GameState::Juego2;
+					}
 					return;
 					break;
 				}

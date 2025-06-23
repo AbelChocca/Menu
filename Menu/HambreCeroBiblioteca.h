@@ -17,6 +17,7 @@ enum class GameState {
     Informacion,
     SeleccionJuego,
     Juego1,
+    Juego2,
     Salir,
 };
 extern GameState currentState;
@@ -109,4 +110,7 @@ namespace Juegos {
 namespace PrimerJuego {
     void ConfigurarPrimerNivel();
     void IniciarJuego();
+}
+namespace Juego2 {
+    void IniciarJuego2();
 }

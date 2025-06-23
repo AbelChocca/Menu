@@ -164,7 +164,7 @@ namespace PrimerJuego {
 		int longitud = wcslen(caja[0]);
 		for (int i = 0; i < 6; i++) {
 			int posx = f.Next(10, 95);
-			int posy = f.Next(26, 33);
+			int posy = f.Next(26, 30);
 
 			FiguraAvanzada Cajita{
 				caja,
@@ -262,6 +262,7 @@ namespace PrimerJuego {
 	void RenderizarPantalla() {
 		if (mostrarIndicacion) {
 			ImprimirIndicacion();
+			Sleep(500);
 		}
 		else {
 			BorrarIndicacion();
@@ -340,8 +341,7 @@ namespace PrimerJuego {
 			if (colisiones_cajas || colisiones_bordes) {
 				mark.posx = mark_old_posx;
 				mark.posy = mark_old_posy;
-				mostrarIndicacion = true;
-
+				if (!colisiones_bordes) mostrarIndicacion = true;
 			}
 			else {
 				mostrarIndicacion = false;
