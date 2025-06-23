@@ -243,6 +243,7 @@ namespace Juegos {
 	}
 	void ElejirJuego() {
 		Console::Clear();
+		funciones::InicializarPantalla();
 		DibujarOpciones();
 		Atajos();
 	}

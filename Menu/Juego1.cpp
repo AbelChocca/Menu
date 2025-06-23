@@ -66,6 +66,14 @@ namespace PrimerJuego {
 			}
 		}
 	}
+	void LiberarPantalla() {
+		for (int i = 0; i < Juego1ALTO; i++) {
+			delete[] Juego1Matriz[i];
+			delete[] Juego1FondoMatriz[i];
+		}
+		delete[] Juego1FondoMatriz;
+		delete[] Juego1Matriz;
+	}
 	void mostrarJuego1() {
 		for (int i = 0; i < Juego1ALTO; i++) {
 			for (int j = 0; j < Juego1ANCHO; j++) {
@@ -295,8 +303,7 @@ namespace PrimerJuego {
 
 		const int VELOCIDAD = 1;
 		
-		while (true) { // Reemplaza 'true' con una condición de fin de nivel
-			// 1. Procesar entrada del usuario
+		while (true) { 
 			int mark_old_posx = mark.posx;
 			int mark_old_posy = mark.posy;
 			if (_kbhit()) {
@@ -305,12 +312,10 @@ namespace PrimerJuego {
 				switch (tecla)
 				{
 				case 13:
-					// Si el jugador presiona 'q' para volver al menú
-					funciones::LiberarPantalla(); // Liberar recursos del juego
+					LiberarPantalla(); 
 					funciones::ResetearConsola();
-					Console::Clear();
-					currentState = GameState::SeleccionJuego; // O GameState::MenuPrincipal
-					return; // Sale de BucleJuegoNivel1
+					currentState = GameState::SeleccionJuego; 
+					return; 
 					break;
 				case 'w':
 					BorrarFrameJugador(mark);
@@ -346,17 +351,8 @@ namespace PrimerJuego {
 			else {
 				mostrarIndicacion = false;
 			}
-			// 2. Actualizar el estado del juego
-			// ... (mover jugador, enemigos, detectar colisiones, etc.)
 
-			// 3. Dibujar/Renderizar
-			// Solo redibujar los elementos que cambian.
-			// La matriz Juego1Matriz ya tiene las paredes, suelo y cajas.
-			// Solo necesitas dibujar el jugador, enemigos, etc., y luego mostrar la pantalla.
-			// Para dibujar:
-			// BorrarJugadorAnterior();
-			// DibujarJugadorNuevo();
-			// Mostrar elementos de la UI (puntaje, vida)
+
 			RenderizarPantalla();
 
 			Sleep(50);
