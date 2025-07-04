@@ -71,7 +71,6 @@ namespace Juego2 {
             }
         }
     }
-
     void inicializarObstaculos() {
         for (int i = 0; i < MAX_OBST; i++) {
             obstY[i] = -(i * 5);

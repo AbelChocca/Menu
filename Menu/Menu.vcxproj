@@ -111,16 +111,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Escenarios\EscenarioInformacion.cpp" />
+    <ClCompile Include="Figuras.cpp" />
     <ClCompile Include="FuncionesMain.cpp" />
     <ClCompile Include="Escenarios\AnimacionEntrada.cpp" />
+    <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Juego1.cpp" />
     <ClCompile Include="Juego2.cpp" />
+    <ClCompile Include="Logica.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="ElejirJuego.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HambreCeroBiblioteca.h" />
+    <ClInclude Include="Juego1.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="audios\FloatingTrees.wav" />

@@ -19,6 +19,9 @@
     <Filter Include="Escenarios">
       <UniqueIdentifier>{6a177c7f-b225-46b3-95b9-37fe2e284517}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Escenarios\Juego1">
+      <UniqueIdentifier>{d9db0a4d-a735-403c-8499-93c64d7ed2e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -36,16 +39,31 @@
     <ClCompile Include="Escenarios\EscenarioInformacion.cpp">
       <Filter>Escenarios</Filter>
     </ClCompile>
-    <ClCompile Include="Juego1.cpp">
-      <Filter>Escenarios</Filter>
-    </ClCompile>
     <ClCompile Include="Juego2.cpp">
       <Filter>Escenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="Juego1.cpp">
+      <Filter>Escenarios\Juego1</Filter>
+    </ClCompile>
+    <ClCompile Include="Figuras.cpp">
+      <Filter>Escenarios\Juego1</Filter>
+    </ClCompile>
+    <ClCompile Include="Logica.cpp">
+      <Filter>Escenarios\Juego1</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp">
+      <Filter>Escenarios\Juego1</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Escenarios\Juego1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HambreCeroBiblioteca.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Juego1.h">
+      <Filter>Escenarios\Juego1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <io.h>
 #include <cstdio>
+#include <string>
 #using <System.dll>
 
 using namespace std;
