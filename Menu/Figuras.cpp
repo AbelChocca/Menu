@@ -235,32 +235,44 @@ namespace figuras {
 		};
 		logica::DibujarFiguraJuego(lorecuatro, Juego1Matriz);
 	}
-	void DibujarInventario() {
-		const wchar_t* inventarioMatriz[] = {
-			L"█████████████████████████",
-			L"███████Inventario████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-			L"█████████████████████████",
-		};
-		int longitud = wcslen(inventarioMatriz[0]);
-		FiguraAvanzada inventarioStruct {
-			inventarioMatriz,
-			13,
-			longitud,
-			5,
-			2,
-			ConsoleColor::DarkYellow,
-			condiciones::CondicionInv
-		};
-		logica::DibujarFiguraJuego(inventarioStruct, Juego1FondoMatriz);
+	void ImprimirInventario() {
+		int longitud = 21;
+		Console::SetCursorPosition(ANCHO_TOTAL - (15 + (longitud / 2)), 2);
+		std::cout << "-----Inventario-----";
+		for (int i = 0; i < 3; i++) {
+			string nombre = inventario[i].insumo;
+			int cantidad = inventario[i].cantidad;
+
+			int posx = Juego1ANCHO + 2;
+			int posy = 6 + i;
+			Console::SetCursorPosition(posx, posy);
+			Console::ForegroundColor = ConsoleColor::White;
+			std::cout << nombre + ": " << cantidad;
+		}
+	}
+	// Indicacion insumos insuficientes
+	void ImprimirIndicacionInsumos() {
+		for (int i = 0; i < alturaInsumos; i++) {
+			for (int j = 0; j < longitudInsumos; j++) {
+				int posx = (Juego1ANCHO / 2 - (longitudInsumos / 2)) + j;
+				int posy = Juego1ALTO - 8;
+
+				Console::ForegroundColor = ConsoleColor::DarkRed;
+				Console::SetCursorPosition(posx, posy);
+				Console::Write(indicacion_insumos[i][j]);
+			}
+		}
+	}
+	void BorrarIndicacionInsumos() {
+		for (int i = 0; i < alturaInsumos; i++) {
+			for (int j = 0; j < longitudInsumos; j++) {
+				int posx = (Juego1ANCHO / 2 - (longitudInsumos / 2)) + j;
+				int posy = Juego1ALTO - 8;
+
+				Console::ForegroundColor = Juego1FondoMatriz[posy][posx].color;
+				Console::SetCursorPosition(posx, posy);
+				Console::Write(Juego1FondoMatriz[posy][posx].simbolo);
+			}
+		}
 	}
 }

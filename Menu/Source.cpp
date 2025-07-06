@@ -3,8 +3,6 @@
 GameState currentState = GameState::MenuPrincipal;
 
 int main() {
-	SetConsoleOutputCP(CP_UTF8);
-	_setmode(_fileno(stdout), _O_U16TEXT);
 
 	while (currentState != GameState::Salir)
 	{

@@ -4,7 +4,7 @@
 namespace config {
 	void mostrarJuego1() {
 		for (int i = 0; i < Juego1ALTO; i++) {
-			for (int j = 0; j < ANCHO_TOTAL; j++) {
+			for (int j = 0; j < Juego1ANCHO; j++) {
 				Console::ForegroundColor = Juego1Matriz[i][j].color;
 				Console::SetCursorPosition(j, i);
 				Console::Write(Juego1Matriz[i][j].simbolo);
@@ -19,8 +19,8 @@ namespace config {
 	void InicializarJuego1() {
 		Juego1Matriz = new Celda * [Juego1ALTO];
 		for (int i = 0; i < Juego1ALTO; i++) {
-			Juego1Matriz[i] = new Celda[ANCHO_TOTAL];
-			for (int j = 0; j < ANCHO_TOTAL; ++j) {
+			Juego1Matriz[i] = new Celda[Juego1ANCHO];
+			for (int j = 0; j < Juego1ANCHO; ++j) {
 				Juego1Matriz[i][j].simbolo = L' ';
 				Juego1Matriz[i][j].color = ConsoleColor::Black;
 			}
@@ -28,8 +28,8 @@ namespace config {
 
 		Juego1FondoMatriz = new Celda * [Juego1ALTO];
 		for (int i = 0; i < Juego1ALTO; i++) {
-			Juego1FondoMatriz[i] = new Celda[ANCHO_TOTAL];
-			for (int j = 0; j < ANCHO_TOTAL; ++j) {
+			Juego1FondoMatriz[i] = new Celda[Juego1ANCHO];
+			for (int j = 0; j < Juego1ANCHO; ++j) {
 				Juego1FondoMatriz[i][j].simbolo = L' ';
 				Juego1FondoMatriz[i][j].color = ConsoleColor::Black;
 			}

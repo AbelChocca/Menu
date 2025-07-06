@@ -3,7 +3,7 @@
 
 // Indicacion global
 const wchar_t* indicacion[] = {
-	L"Pulsa 'Q' para agarrar"
+	L"Pulsa 'Q' para agarrar Insumos"
 };
 int longitudIndicacion = wcslen(indicacion[0]);
 int alturaIndicacion = 1;
@@ -68,7 +68,7 @@ namespace PrimerJuego {
 		}
 	}
 
-	void RenderizarPantalla() {
+	void RenderizarPantalla(bool jugador_salir, bool insumos_suficientes) {
 		if (mostrarIndicacion) {
 			ImprimirIndicacion();
 			Sleep(500);
@@ -76,6 +76,14 @@ namespace PrimerJuego {
 		else {
 			BorrarIndicacion();
 		}
+
+		if (jugador_salir && !insumos_suficientes) {
+			figuras::ImprimirIndicacionInsumos();
+		}
+		else {
+			figuras::BorrarIndicacionInsumos();
+		}
+
 		DibujarMark(mark);
 	}
 
@@ -85,7 +93,7 @@ namespace PrimerJuego {
 		figuras::GenerarSuelo();
 		figuras::GenerarPared();
 		figuras::GenerarCajasRandom();
-		figuras::DibujarInventario();
+		logica::GenerarInsumosRandom();
 		
 		for (int i = 0; i < Juego1ALTO; ++i) {
 			for (int j = 0; j < Juego1ANCHO; ++j) {
@@ -93,14 +101,13 @@ namespace PrimerJuego {
 			}
 		}
 		config::mostrarJuego1();
-		RenderizarPantalla();
 	}
 	// Inciar Juego
 	void IniciarJuego() {
-		ConfigurarPrimerNivel();
 		const int VELOCIDAD = 1;
 		logica::LeerLore();
 		ConfigurarPrimerNivel();
+		figuras::ImprimirInventario();
 		while (true) { 
 			int mark_old_posx = mark.posx;
 			int mark_old_posy = mark.posy;
@@ -109,12 +116,6 @@ namespace PrimerJuego {
 				// Lógica para mover el jugador, etc.
 				switch (tecla)
 				{
-				case 'q':
-					config::LiberarPantalla();
-					funciones::ResetearConsola();
-					currentState = GameState::SeleccionJuego; 
-					return; 
-					break;
 				case 'w':
 					BorrarFrameJugador(mark);
 					mark.posy -= VELOCIDAD;
@@ -137,6 +138,7 @@ namespace PrimerJuego {
 
 			bool colisiones_cajas = logica::DetectarColisiones(mark);
 			bool colisiones_bordes = false;
+			bool detectar_jugador = logica::DetectarJugador(mark);
 			if (mark.posy < limiteSuperiorJuego || mark.posy > limiteInferiorJuego
 				|| mark.posx > limiteDerechoJuego || mark.posx < limiteIzquierdoJuego) {
 				colisiones_bordes = true;
@@ -144,14 +146,33 @@ namespace PrimerJuego {
 			if (colisiones_cajas || colisiones_bordes) {
 				mark.posx = mark_old_posx;
 				mark.posy = mark_old_posy;
-				if (!colisiones_bordes) mostrarIndicacion = true;
+				
+			}
+			if (detectar_jugador) {
+				logica::AgarrarInsumos();
+				mostrarIndicacion = true;
 			}
 			else {
 				mostrarIndicacion = false;
 			}
 
+			bool jugador_salir = logica::SalirAlmacen(mark);
+			bool insumos_suficientes = logica::ContadorInsumos();
 
-			RenderizarPantalla();
+			if (jugador_salir && insumos_suficientes) {
+				config::LiberarPantalla();
+				Console::Clear();
+				Console::SetCursorPosition(ANCHO_TOTAL / 2 - (19), Juego1ALTO / 2);
+				Console::ForegroundColor = ConsoleColor::Green;
+				std::cout << "¡Has salido del almacén con éxito!";
+				Sleep(2000);
+				break; 
+			}
+			
+
+
+
+			RenderizarPantalla(jugador_salir, insumos_suficientes);
 
 			Sleep(50);
 		}

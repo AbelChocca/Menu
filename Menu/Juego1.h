@@ -3,7 +3,7 @@
 
 // Estructuras
 struct Inventario {
-	string insumo;
+	std::string insumo;
 	int cantidad;
 };
 
@@ -12,12 +12,17 @@ extern Celda** Juego1Matriz;
 extern Celda** Juego1FondoMatriz;
 extern FiguraAvanzada cajitas[6];
 extern Inventario inventario[3];
+extern Inventario almacen[3];
 
 extern const int Juego1ALTO;
 extern const int Juego1ANCHO;
 extern const int ANCHO_TOTAL;
 
 extern bool mostrarIndicacion;
+
+extern const wchar_t* indicacion_insumos[];
+extern int longitudInsumos;
+extern int alturaInsumos;
 
 // Variables Figuras.cpp
 extern FiguraAvanzada mark;
@@ -40,7 +45,9 @@ namespace figuras {
 	void GenerarPared();
 	void GenerarCajasRandom();
 	void GenerarSuelo();
-	void DibujarInventario();
+	void ImprimirInventario();
+	void ImprimirIndicacionInsumos();
+	void BorrarIndicacionInsumos();
 
 	// Lore
 	void DibujarLore();
@@ -51,5 +58,10 @@ namespace figuras {
 namespace logica {
 	void DibujarFiguraJuego(FiguraAvanzada& figura, Celda** matrizDestino);
 	bool DetectarColisiones(FiguraAvanzada& jugador);
+	bool DetectarJugador(FiguraAvanzada& jugador);
+	void GenerarInsumosRandom();
+	void AgarrarInsumos();
+	bool SalirAlmacen(FiguraAvanzada& mark);
+	bool ContadorInsumos();
 	void LeerLore();
 }
