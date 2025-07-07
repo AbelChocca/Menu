@@ -22,6 +22,9 @@
     <Filter Include="Escenarios\Juego1">
       <UniqueIdentifier>{d9db0a4d-a735-403c-8499-93c64d7ed2e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Escenarios\Juego2">
+      <UniqueIdentifier>{95142eae-61d9-47e0-8569-592390983fd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -39,9 +42,6 @@
     <ClCompile Include="Escenarios\EscenarioInformacion.cpp">
       <Filter>Escenarios</Filter>
     </ClCompile>
-    <ClCompile Include="Juego2.cpp">
-      <Filter>Escenarios</Filter>
-    </ClCompile>
     <ClCompile Include="Juego1.cpp">
       <Filter>Escenarios\Juego1</Filter>
     </ClCompile>
@@ -56,6 +56,12 @@
     </ClCompile>
     <ClCompile Include="Config.cpp">
       <Filter>Escenarios\Juego1</Filter>
+    </ClCompile>
+    <ClCompile Include="Juego2Reemplazo.cpp">
+      <Filter>Escenarios\Juego2</Filter>
+    </ClCompile>
+    <ClCompile Include="ChanchoAnimacion.cpp">
+      <Filter>Escenarios</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

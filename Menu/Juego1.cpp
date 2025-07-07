@@ -166,6 +166,7 @@ namespace PrimerJuego {
 				Console::ForegroundColor = ConsoleColor::Green;
 				std::cout << "¡Has salido del almacén con éxito!";
 				Sleep(2000);
+				currentState = GameState::Chancho;
 				break; 
 			}
 			

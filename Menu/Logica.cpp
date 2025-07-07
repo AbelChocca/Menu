@@ -105,6 +105,7 @@ namespace logica {
 					inventario[i].cantidad += 1;
 				almacen[i].cantidad--;
 				figuras::ImprimirInventario();
+				Sleep(1000);
 			}
 		}
 	};

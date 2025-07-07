@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <fcntl.h>
 #include <io.h>
+#include <ctime>
 #include <cstdio>
 #include <string>
 #using <System.dll>
@@ -19,6 +20,7 @@ enum class GameState {
     SeleccionJuego,
     Juego1,
     Juego2,
+    Chancho,
     Salir,
 };
 extern GameState currentState;
@@ -114,4 +116,7 @@ namespace PrimerJuego {
 }
 namespace Juego2 {
     void IniciarJuego2();
+}
+namespace Chancho {
+    void AnimacionChancho();
 }
